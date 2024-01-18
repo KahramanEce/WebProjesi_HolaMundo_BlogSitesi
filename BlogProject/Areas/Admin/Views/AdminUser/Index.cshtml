@@ -1,0 +1,32 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@model IPagedList<EntityLayer.Concrete.AppUser>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<h1>Yazar Listesi</h1>
+<br />
+<table class="table table-bordered">
+
+    <tr>
+        <th>#</th>
+        <th>Adı Soyadı</th>
+        <th>Kullanıcı Adı</th>
+        <th>Mail Adresi</th>
+        <th>Sil</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>@item.Id</th>
+            <td>@item.NameSurname</td>
+            <td>@item.UserName</td>
+            <td>@item.Email</td>
+            <td><a href="/Admin/AdminUser/DeleteUser/@item.Id/" id="DeleteBtn" onclick="return confirm('Silmek istediğinize emin misiniz?');" class="btn btn-danger">Sil</a></td>
+        </tr>
+    }
+</table>
+<br />
+@Html.PagedListPager((IPagedList)Model,page=>Url.Action("Index",new{page}))

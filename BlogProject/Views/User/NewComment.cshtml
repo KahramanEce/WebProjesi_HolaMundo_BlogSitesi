@@ -1,0 +1,26 @@
+﻿@model EntityLayer.Concrete.Comment
+@{
+    ViewData["Title"] = "NewComment";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+<h1>Yeni Yorum </h1>
+<br />
+@using (Html.BeginForm("NewComment", "User", FormMethod.Post))
+{
+    @Html.Label("Adınız Soyadınız")
+    @Html.TextBoxFor(x=>x.AppUser.UserName, new{@class="form-control"})
+    @Html.ValidationMessageFor(x=>x.AppUser.UserName)
+    <br />
+    @Html.Label("Yorum Başlığı")
+    @Html.TextBoxFor(x=>x.CommentTitle, new{@class="form-control"})
+    @Html.ValidationMessageFor(x=>x.CommentTitle)
+    <br />
+    @Html.Label("Yorum")
+    @Html.TextAreaFor(x=>x.CommentContent,15,3, new{@class="form-control"})
+    @Html.ValidationMessageFor(x=>x.CommentContent)
+    <br />
+    <br />
+    <button@* href="/Blog/BlogReadAll/@item.BlogID"*@ class="btn btn-info">Yorumu Gönder</button>
+}
+

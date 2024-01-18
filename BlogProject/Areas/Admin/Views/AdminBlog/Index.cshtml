@@ -1,0 +1,36 @@
+﻿@using X.PagedList 
+@using X.PagedList.Mvc.Core
+@model IPagedList<EntityLayer.Concrete.Blog>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<h1>Blog Listesi</h1>
+<br />
+<table class="table table-bordered">
+
+    <tr>
+        <th>#</th>
+        <th>Blog Adı</th>
+        <th>Kategorisi</th>
+        <th>Tarihi</th>
+        <th>Sil</th>
+        <th>İncele</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>@item.BlogID</th>
+            <td>@item.Title</td>
+            <td>@item.Category.Name</td>
+            <td>@item.BlogCreateDate</td>
+            <td><a href="/Admin/AdminBlog/AdminBlogDelete/@item.BlogID/" id="DeleteBtn" onclick="return confirm('Silmek istediğinize emin misiniz?');" class="btn btn-danger">Sil</a></td>
+            <td><a href="/Blog/BlogReadAll/@item.BlogID/" class="btn btn-success">İncele</a></td>
+        </tr>
+    }
+</table>
+<br />
+@Html.PagedListPager((IPagedList)Model,page=>Url.Action("Index",new{page}))
+
+

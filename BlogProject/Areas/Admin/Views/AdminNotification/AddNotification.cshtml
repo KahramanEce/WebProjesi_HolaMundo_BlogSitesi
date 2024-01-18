@@ -1,0 +1,22 @@
+﻿@model EntityLayer.Concrete.Notification
+@{
+    ViewData["Title"] = "AddNotification";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<h1>Yeni Bildirim Girişi</h1>
+<br />
+@using (Html.BeginForm("AddNotification", "AdminNotification", FormMethod.Post))
+{
+    @Html.Label("Bildirim Başlığı")
+    @Html.TextBoxFor(x=>x.NotificationType, new{@class="form-control"})
+    @Html.ValidationMessageFor(x=>x.NotificationType)
+    <br />
+    @Html.Label("Bildirim İçeriği")
+    @Html.TextAreaFor(x=>x.NotificationDetails,15,3, new{@class="form-control"})
+    @Html.ValidationMessageFor(x=>x.NotificationDetails)
+    <br />
+    <br />
+    <button class="btn btn-info">Bildirimi Gönder</button>
+}
+
